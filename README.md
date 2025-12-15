@@ -101,8 +101,10 @@ Rscript -e 'devtools::install_version("MASS", version = "7.3-58.3", repos = "htt
 #Rscript -e 'devtools::install_version("units", version = "0.8-2", repos = "https://cloud.r-project.org")'
 
 # IMPORTANT: Install rtracklayer package version 0.8-2 (compatible with R 4.3)
-Rscript -e 'devtools::install_version("rtracklayer", version = "1.62.0", repos = "https://cloud.r-project.org")'
-
+#Rscript -e 'devtools::install_version("rtracklayer", version = "1.62.0", repos = "https://cloud.r-project.org")'
+conda install -c conda-forge -c bioconda bioconductor-rtracklayer -y
+conda install bioconda::bioconductor-rbgl
+conda install conda-forge::r-rsqlite
 
 Rscript -e 'if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman", repos = "https://cloud.r-project.org"); pacman::p_load(xml2, curl, httpuv, shiny, gh, gert, usethis, pkgdown, rcmdcheck, roxygen2, rversions, urlchecker, BiocManager)'
 
