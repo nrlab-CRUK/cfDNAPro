@@ -83,6 +83,10 @@ conda install -y -c conda-forge r-xml2 r-curl
 conda install -y -c conda-forge libgdal 
 conda install -y r::r-libgeos
 conda install -y -c conda-forge udunits2
+conda install conda-forge::r-rcpp
+conda install conda-forge::r-later
+
+conda install conda-forge::r-devtools
 
 # Install devtools if it's not already installed
 Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos = "https://cloud.r-project.org")'
