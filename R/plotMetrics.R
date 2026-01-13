@@ -79,7 +79,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
             data = x,
             aes(x = insert_size, y = prop_median, color = group)
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         ylim(ylim) +
         xlab("Fragment size (bp)") +
@@ -95,7 +95,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
                 color = group
             )
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Median cumulative fraction of reads") +
@@ -110,7 +110,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
                 color = group
             )
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Median cumulative fraction of reads > Fragment size") +
@@ -124,7 +124,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
             data = x,
             aes(x = insert_size, y = prop_mean, color = group)
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         ylim(ylim) +
         xlab("Fragment size (bp)") +
@@ -136,7 +136,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
             data = x,
             aes(x = insert_size, y = cdf_mean, color = group)
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Mean cumulative fraction of reads") +
@@ -147,7 +147,7 @@ plotMetrics <- function(x, order, plot, vline, xlim, ylim, ...) {
             data = x,
             aes(x = insert_size, y = one_minus_cdf_mean, color = group)
         ) +
-        geom_line(size = 1) +
+        geom_line(linewidth = 1) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Mean cumulative fraction of reads > Fragment size") +

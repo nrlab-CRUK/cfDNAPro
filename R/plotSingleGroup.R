@@ -71,7 +71,7 @@ plotSingleGroup <-
                 data = x,
                 aes(x = insert_size, y = prop, color = file_name)
             ) +
-            geom_line(size = 1) +
+            geom_line(linewidth = 1) +
             xlim(xlim) +
             ylim(ylim) +
             xlab("Fragment size (bp)") +
@@ -88,7 +88,7 @@ plotSingleGroup <-
                 data = x,
                 aes(x = insert_size, y = cdf, color = file_name)
             ) +
-            geom_line(size = 1) +
+            geom_line(linewidth = 1) +
             xlim(xlim) +
             xlab("Fragment size (bp)") +
             ylab("Cumulative proportion of reads") +
@@ -104,7 +104,7 @@ plotSingleGroup <-
                 data = x,
                 aes(x = insert_size, y = one_minus_cdf, color = file_name)
             ) +
-            geom_line(size = 1) +
+            geom_line(linewidth = 1) +
             xlim(xlim) +
             xlab("Fragment size (bp)") +
             ylab("Cumulative proportion of reads > fragment size") +

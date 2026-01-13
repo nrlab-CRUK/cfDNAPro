@@ -65,7 +65,7 @@ plotAllToOne <- function(x, order, plot, vline, xlim, ylim, ...) {
     # Prop plot.
     prop_plot <-
         ggplot(data = x, aes(x = insert_size, y = prop, color = group)) +
-        geom_line(size = 1, aes(group = file_name)) +
+        geom_line(linewidth = 1, aes(group = file_name)) +
         xlim(xlim) +
         ylim(ylim) +
         xlab("Fragment size (bp)") +
@@ -75,7 +75,7 @@ plotAllToOne <- function(x, order, plot, vline, xlim, ylim, ...) {
     # Cdf plot.
     cdf_plot <-
         ggplot(data = x, aes(x = insert_size, y = cdf, color = group)) +
-        geom_line(size = 1, aes(group = file_name)) +
+        geom_line(linewidth = 1, aes(group = file_name)) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Cumulative proportion of reads") +
@@ -85,7 +85,7 @@ plotAllToOne <- function(x, order, plot, vline, xlim, ylim, ...) {
         ggplot(data = x, aes(x = insert_size, 
                              y = one_minus_cdf, 
                              color = group)) +
-        geom_line(size = 1, aes(group = file_name)) +
+        geom_line(linewidth = 1, aes(group = file_name)) +
         xlim(xlim) +
         xlab("Fragment size (bp)") +
         ylab("Cumulative proportion of reads > fragment size") +

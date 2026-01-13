@@ -197,7 +197,7 @@ plotCNV <- function(x,
       return(NULL)
 
     } else {
-      ans <- plyranges::filter(expanded_all_genes_tb,
+      ans <- dplyr::filter(expanded_all_genes_tb,
                                .data[[col]] %in% gene_to_highlight[[x]])
       message("Found these entries: \n")
       print(ans)

@@ -25,7 +25,6 @@
 #'
 #' @importFrom Rsamtools ScanBamParam
 #' @importFrom Rsamtools scanBam
-#' @importFrom plyranges filter
 #' @importFrom dplyr filter rename select group_by summarise 
 #' @importFrom BiocGenerics start end strand width
 #' @importFrom rlang .data
@@ -80,8 +79,7 @@ read_bam_insert_metrics <- function(bamfile = NULL,
   frag$insert_size <- BiocGenerics::width(frag)
   
   # size analysis
-  frag <- plyranges::filter(frag, 
-                          insert_size >= isize_min & insert_size <= isize_max)
+  frag <- frag[frag$insert_size >= isize_min & frag$insert_size <= isize_max]
   isize <- frag$insert_size 
   
   isize_tibble <- tibble("insert_size" = isize, "count" = 1 ) %>%
