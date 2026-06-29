@@ -71,54 +71,9 @@ singularity pull docker://zetianjia/cfdnapro:1.7.3
 singularity exec -e cfdnapro_1.7.3.sif R --no-save
 ```
 
-### Option 2: Use anaconda to build an env using the following codes:
 
-``` bash
-
-conda create -y cfdnapro_r4.3.3 r-base=4.3.3
-
-conda activate  cfdnapro_r4.3.3
-
-conda install -y -c conda-forge r-xml2 r-curl
-conda install -y -c conda-forge libgdal 
-conda install -y r::r-libgeos
-conda install -y -c conda-forge udunits2
-conda install conda-forge::r-rcpp
-conda install conda-forge::r-later
-
-conda install conda-forge::r-devtools
-
-# Install devtools if it's not already installed
-Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos = "https://cloud.r-project.org")'
-
-# IMPORTANT: Install Matrix version 1.6-5 (compatible with R 4.3)
-Rscript -e 'devtools::install_version("Matrix", version = "1.6-5", repos = "https://cloud.r-project.org")'
-
-# IMPORTANT: Install MASS version 7.3-58.35 (compatible with R 4.3)
-Rscript -e 'devtools::install_version("MASS", version = "7.3-58.3", repos = "https://cloud.r-project.org")'
-
-# IMPORTANT: Install units package version 0.8-2 (compatible with R 4.3)
-#Rscript -e 'devtools::install_version("units", version = "0.8-2", repos = "https://cloud.r-project.org")'
-
-# IMPORTANT: Install rtracklayer package version 0.8-2 (compatible with R 4.3)
-#Rscript -e 'devtools::install_version("rtracklayer", version = "1.62.0", repos = "https://cloud.r-project.org")'
-conda install -c conda-forge -c bioconda bioconductor-rtracklayer -y
-conda install bioconda::bioconductor-rbgl
-conda install conda-forge::r-rsqlite
-
-Rscript -e 'if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman", repos = "https://cloud.r-project.org"); pacman::p_load(xml2, curl, httpuv, shiny, gh, gert, usethis, pkgdown, rcmdcheck, roxygen2, rversions, urlchecker, BiocManager)'
-
-# IMPORTANT: you have to set the timeout time as these packages are quite big, if timeout is too short, the installation might fail due to a slow downloading process
-Rscript -e 'options(timeout=3600); if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager"); BiocManager::install("OrganismDbi")'
-Rscript -e 'options(timeout=3600); pkgs <- c("GenomicAlignments", "rtracklayer", "GenomicFeatures", "BSgenome", "BSgenome.Hsapiens.UCSC.hg38", "BSgenome.Hsapiens.UCSC.hg19", "BSgenome.Hsapiens.NCBI.GRCh38", "Homo.sapiens", "plyranges", "TxDb.Hsapiens.UCSC.hg19.knownGene"); new <- pkgs[!pkgs %in% installed.packages()[,"Package"]]; if(length(new)) BiocManager::install(new)'
-
-Rscript -e 'pacman::p_load(car, mgcv, pbkrtest, quantreg, lme4, ggplot2, ggrepel, ggsci, cowplot, ggsignif, rstatix, ggpubr, patchwork,ggpattern)'
-Rscript -e 'devtools::install_github("asntech/QDNAseq.hg38@main")'
-
-# install cfDNAPro
-Rscript -e 'devtools::install_github("hw538/cfDNAPro", build_vignettes = FALSE, force = TRUE)'
 ```
-### Option 3: Your can try to install in your local R console:
+### Option 2: Your can try to install in your local R console:
 
 In R console (tested using R 4.5.2 locally), you can try to install with following methods: 
 ```R
