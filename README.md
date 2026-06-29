@@ -71,8 +71,6 @@ singularity pull docker://zetianjia/cfdnapro:1.7.3
 singularity exec -e cfdnapro_1.7.3.sif R --no-save
 ```
 
-
-```
 ### Option 2: Your can try to install in your local R console:
 
 In R console (tested using R 4.5.2 locally), you can try to install with following methods: 
