@@ -161,17 +161,53 @@ readBam <- function(bamfile,
         fragmentwise <- curate_start_and_end(galp = galp)
 
         names(fragmentwise) <- names(galp)
-        # Get sequence names from genome (adjust 'genome' as needed)
+        # Get sequence names from genome
         genome_seqnames <- names(seqlengths(genome))
-
-        # Create named vector with chromosome names as indices
-        genome_indices <- setNames(seq_along(genome_seqnames), genome_seqnames)
-
-        # Extract indices for required chromosomes
-        chromosome_indices <- genome_indices[chromosome_to_keep]
-
-        # Update sequence lengths and genome name
-        seqlengths(fragmentwise) <- seqlengths(genome)[chromosome_indices]
+        
+        # Get actual seqnames present in fragmentwise (after filtering)
+        frag_seqnames <- unique(seqnames(fragmentwise))
+        
+        # Check which chromosomes from fragmentwise exist in the genome
+        frag_seqnames_in_genome <- frag_seqnames[frag_seqnames %in% genome_seqnames]
+        
+        # Handle mitochondrial chromosome naming variations
+        # Check if user requested chrM but genome uses different name
+        mt_names <- c("chrM", "chrMT", "MT", "M")
+        requested_mt <- chromosome_to_keep[chromosome_to_keep %in% mt_names]
+        genome_mt <- genome_seqnames[genome_seqnames %in% mt_names]
+        
+        if (length(requested_mt) > 0 && length(genome_mt) > 0) {
+          # If user requested one mt name but genome has different one, use genome's name
+          if (!any(requested_mt %in% genome_seqnames) && length(genome_mt) > 0) {
+            frag_seqnames_in_genome <- c(frag_seqnames_in_genome, genome_mt[1])
+            message(paste0("Note: Using '", genome_mt[1], "' for mitochondrial chromosome ",
+                          "(requested: ", paste(requested_mt, collapse = ", "), ")."))
+          }
+        }
+        
+        # Warn if some requested chromosomes are not found in genome
+        missing_in_genome <- setdiff(chromosome_to_keep, genome_seqnames)
+        if (length(missing_in_genome) > 0) {
+          # Check if any are mitochondrial chromosome variants
+          mt_missing <- missing_in_genome[missing_in_genome %in% mt_names]
+          if (length(mt_missing) > 0 && length(genome_mt) > 0) {
+            # Mitochondrial chromosome exists but with different name - already handled above
+            missing_in_genome <- setdiff(missing_in_genome, mt_missing)
+          }
+          if (length(missing_in_genome) > 0) {
+            warning(paste("The following chromosomes were requested but not found in the genome:",
+                         paste(missing_in_genome, collapse = ", ")))
+          }
+        }
+        
+        # Update sequence lengths only for chromosomes that exist in both fragmentwise and genome
+        if (length(frag_seqnames_in_genome) > 0) {
+          seqlengths(fragmentwise)[frag_seqnames_in_genome] <- seqlengths(genome)[frag_seqnames_in_genome]
+        } else {
+          warning("No matching chromosomes found between fragmentwise object and genome seqnames.")
+        }
+        
+        # Update genome name
         genome(fragmentwise) <- genome_name
 
     } else {

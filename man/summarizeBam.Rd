@@ -2,9 +2,35 @@
 % Please edit documentation in R/summarizeBam.R
 \name{summarizeBam}
 \alias{summarizeBam}
+\alias{summariseBam}
 \title{Summarise descriptive Bam stats}
 \usage{
 summarizeBam(
+  bamfile = NULL,
+  total_count = TRUE,
+  total_mapped_count = TRUE,
+  chrM_count = TRUE,
+  duplicate_count = TRUE,
+  coverage_by_mapped = TRUE,
+  genome_length_bp = 3.2e+09,
+  customized_count = FALSE,
+  customized_count_mapqFilter = NA_integer_,
+  customized_count_isPaired = NA,
+  customized_count_isProperPair = NA,
+  customized_count_isUnmappedQuery = NA,
+  customized_count_hasUnmappedMate = NA,
+  customized_count_isMinusStrand = NA,
+  customized_count_isMateMinusStrand = NA,
+  customized_count_isFirstMateRead = NA,
+  customized_count_isSecondMateRead = NA,
+  customized_count_isSecondaryAlignment = NA,
+  customized_count_isNotPassingQualityControls = NA,
+  customized_count_isDuplicate = NA,
+  customized_count_isSupplementaryAlignment = NA,
+  ...
+)
+
+summariseBam(
   bamfile = NULL,
   total_count = TRUE,
   total_mapped_count = TRUE,

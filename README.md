@@ -83,6 +83,10 @@ conda install -y -c conda-forge r-xml2 r-curl
 conda install -y -c conda-forge libgdal 
 conda install -y r::r-libgeos
 conda install -y -c conda-forge udunits2
+conda install conda-forge::r-rcpp
+conda install conda-forge::r-later
+
+conda install conda-forge::r-devtools
 
 # Install devtools if it's not already installed
 Rscript -e 'if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos = "https://cloud.r-project.org")'
@@ -97,8 +101,10 @@ Rscript -e 'devtools::install_version("MASS", version = "7.3-58.3", repos = "htt
 #Rscript -e 'devtools::install_version("units", version = "0.8-2", repos = "https://cloud.r-project.org")'
 
 # IMPORTANT: Install rtracklayer package version 0.8-2 (compatible with R 4.3)
-Rscript -e 'devtools::install_version("rtracklayer", version = "1.62.0", repos = "https://cloud.r-project.org")'
-
+#Rscript -e 'devtools::install_version("rtracklayer", version = "1.62.0", repos = "https://cloud.r-project.org")'
+conda install -c conda-forge -c bioconda bioconductor-rtracklayer -y
+conda install bioconda::bioconductor-rbgl
+conda install conda-forge::r-rsqlite
 
 Rscript -e 'if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman", repos = "https://cloud.r-project.org"); pacman::p_load(xml2, curl, httpuv, shiny, gh, gert, usethis, pkgdown, rcmdcheck, roxygen2, rversions, urlchecker, BiocManager)'
 
@@ -111,6 +117,20 @@ Rscript -e 'devtools::install_github("asntech/QDNAseq.hg38@main")'
 
 # install cfDNAPro
 Rscript -e 'devtools::install_github("hw538/cfDNAPro", build_vignettes = FALSE, force = TRUE)'
+```
+### Option 3: Your can try to install in your local R console:
+
+In R console (tested using R 4.5.2 locally), you can try to install with following methods: 
+```R
+options(timeout = 3600)
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools", repos = "https://cloud.r-project.org")
+}
+
+
+# Install cfDNAPro from GitHub
+devtools::install_github("hw538/cfDNAPro", build_vignettes = FALSE, force = TRUE)
+
 ```
 
 ## Quick Start 1

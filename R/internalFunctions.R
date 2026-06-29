@@ -205,11 +205,11 @@ calcualte_intervalley_dist <- function(x) {
 
 calculate_prop <- function(x) {
     result <-
-        # Tranform to dataframe format.
+        # Transform to dataframe format.
         as_tibble(x) %>%
         # Only keep those >=30 bp inserts.
         dplyr::filter(.data$insert_size >= 30) %>%
-        # Calcuate proportion and add new column called "prop".
+        # Calculate proportion and add new column called "prop".
     mutate(prop = .data$All_Reads.fr_count / sum(.data$All_Reads.fr_count)) %>%
         # Only keep the "insert_size" and "prop" column.
         dplyr::select(c("insert_size", "prop"))
@@ -218,11 +218,11 @@ calculate_prop <- function(x) {
 
 calculate_prop_cdf <- function(x) {
     result <-
-        # Tranform to dataframe format.
+        # Transform to dataframe format.
         as_tibble(x) %>%
         # Only keep those >=30 bp inserts.
         dplyr::filter(.data$insert_size >= 30) %>%
-        # Calcuate proportion and add new column called "prop".
+        # Calculate proportion and add new column called "prop".
     mutate(prop = .data$All_Reads.fr_count / sum(.data$All_Reads.fr_count)) %>%
         # Add cdf column.
         dplyr::mutate(cdf = cumsum(.data$prop)) %>%

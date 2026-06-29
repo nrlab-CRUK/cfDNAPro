@@ -44,9 +44,8 @@ callLength <- function(frag_obj,
     frag$insert_size <- BiocGenerics::width(frag)
 
     # Size analysis
-    frag <- plyranges::filter(frag,
-                              insert_size >= isize_min &
-                                insert_size <= isize_max)
+    frag <- frag[frag$insert_size >= isize_min &
+                   frag$insert_size <= isize_max]
     isize <- frag$insert_size
 
     isize_tibble <- tibble("insert_size" = isize, "count" = 1) %>%
